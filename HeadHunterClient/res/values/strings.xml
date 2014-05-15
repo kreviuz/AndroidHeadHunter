@@ -4,6 +4,6 @@
     <string name="app_name">HeadHunterClient</string>
     <string name="action_settings">Settings</string>
     <string name="button_search">Search</string>
-	<string name="hint_search">Search</string>
+	<string name="hint_search">Enter Period</string>
     
 </resources>
