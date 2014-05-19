@@ -32,23 +32,4 @@
         android:layout_marginTop="100dp" >
     </ListView>
 
-    <ImageButton
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/listViewVacancies"
-        android:layout_below="@+id/editTextSearch"
-        android:src="@drawable/ic_action_next_item"
-        android:onClick="searchNext" />
-
-    <ImageButton
-        android:id="@+id/buttonPrev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonNext"
-        android:layout_alignBottom="@+id/buttonNext"
-        android:layout_alignLeft="@+id/listViewVacancies"
-        android:onClick="searchPrev"
-        android:src="@drawable/ic_action_previous_item"/>
-
 </RelativeLayout>

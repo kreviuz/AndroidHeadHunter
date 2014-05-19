@@ -1,12 +1,9 @@
 package com.headhunter.headhunterclient;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,13 +12,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Debug;
-import android.text.format.DateFormat;
 
 public class HeadHunterHelper extends
 		AsyncTask<String, ArrayList<VacancyItemModel>, VacancyModel> {
@@ -34,7 +29,7 @@ public class HeadHunterHelper extends
 	public static final String JSON_PARAMETER_ID = "id";
 	public static final String JSON_PARAMETER_URL = "url";
 	public static final String JSON_PARAMETER_EMPLOYER = "employer";
-	public static final String JSON_PARAMETER_ORIGINAL = "original";
+	public static final String JSON_PARAMETER_90 = "90";
 	public static final String JSON_PARAMETER_LOGO = "logo_urls";
 	public static final String JSON_PARAMETER_PAGE = "page";
 	public static final String JSON_PARAMETER_PAGES = "pages";
@@ -95,12 +90,14 @@ public class HeadHunterHelper extends
 						.getJSONObject(JSON_PARAMETER_EMPLOYER);
 				publisher.setId(jPublisher.getInt(JSON_PARAMETER_ID));
 				publisher.setName(jPublisher.getString(JSON_PARAMETER_NAME));
-				SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT, activity.getResources().getConfiguration().locale);
-				modelItem.setDate(formatter.parse(item.getString(JSON_PARAMETER_CREATED_AT)));
-				if (!jPublisher.has(JSON_PARAMETER_LOGO)) {
-					JSONObject jIcons = jPublisher
-							.getJSONObject(JSON_PARAMETER_LOGO);
-					String iconUrl = jIcons.getString(JSON_PARAMETER_LOGO);
+				SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT,
+						activity.getResources().getConfiguration().locale);
+				modelItem.setDate(formatter.parse(item
+						.getString(JSON_PARAMETER_CREATED_AT)));
+				JSONObject jIcons = jPublisher
+						.optJSONObject(JSON_PARAMETER_LOGO);
+				if (jIcons != null) {
+					String iconUrl = jIcons.getString(JSON_PARAMETER_90);
 					publisher.setIconUrl(iconUrl);
 					Drawable icon = LoadImageFromWebOperations(new URL(iconUrl));
 					modelItem.setPublisherIcon(icon);
@@ -118,7 +115,7 @@ public class HeadHunterHelper extends
 	@Override
 	protected void onPostExecute(VacancyModel result) {
 		activity.setData(result);
-		activity.setDataFlag(false);
+		activity.setDialog(false);
 	};
 
 	private String createRequestString(String serviceName,
