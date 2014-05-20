@@ -6,7 +6,6 @@
     <string name="action_search">Search</string>
     <string name="hint_search">Enter Period</string>
     <string name="title_activity_detail">DetailActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="message_load">"Please wait"</string>
     <string name="message_error">"Error while getting request data"</string>
 

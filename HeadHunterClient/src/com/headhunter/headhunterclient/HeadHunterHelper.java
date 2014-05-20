@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,6 +25,7 @@ public class HeadHunterHelper extends
 	public static final String SERVICE_VACANCIES = "vacancies";
 	public static final String SERVICE_PARAMETER_TEXT = "text";
 	public static final String SERVICE_PARAMETER_PAGE = "page";
+	public static final String SERVICE_PARAMETER_LOCALE = "locale";
 	public static final String JSON_PARAMETER_NAME = "name";
 	public static final String JSON_PARAMETER_ITEMS = "items";
 	public static final String JSON_PARAMETER_ID = "id";
@@ -57,8 +59,11 @@ public class HeadHunterHelper extends
 			if (page == "") {
 				page = "0";
 			}
+			Locale currentLocale = activity.getResources().getConfiguration().locale;
 			parameters
 					.add(new BasicNameValuePair(SERVICE_PARAMETER_PAGE, page));
+			parameters
+					.add(new BasicNameValuePair(SERVICE_PARAMETER_LOCALE, currentLocale.getLanguage().toUpperCase(currentLocale)));
 			String requestUrl = createRequestString(SERVICE_VACANCIES,
 					parameters);
 			HttpGet httpget = new HttpGet(requestUrl);

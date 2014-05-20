@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Клиент HeadHunter</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_search">Поиск</string>
+    <string name="hint_search">Введите период</string>
+    <string name="title_activity_detail">Детали</string>
+    <string name="message_load">"Подождите"</string>
+    <string name="message_error">"Ошибка при получении данных"</string>
+
+</resources>

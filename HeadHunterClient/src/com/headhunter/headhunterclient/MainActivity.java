@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 
 	public static final String EXTRA_VACANCY = "vacancy";
 	public static final String TAG = "Main activity";
+	public static final int MAX_ITEMS = 50;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,10 @@ public class MainActivity extends Activity {
 		ListView lv = (ListView) findViewById(R.id.listViewVacancies);
 		VacancyAdapter adapter = (VacancyAdapter) lv.getAdapter();
 		ArrayList<VacancyItemModel> items = data.getItems();
+		if (adapter.getCount() > MAX_ITEMS) {
+			lv.setSelectionAfterHeaderView();
+			adapter.clearData();
+		}
 		for (VacancyItemModel item : items) {
 			adapter.addItem(item);
 		}
