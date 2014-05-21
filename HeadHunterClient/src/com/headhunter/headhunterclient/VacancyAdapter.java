@@ -66,15 +66,20 @@ public class VacancyAdapter extends BaseAdapter {
 		ViewHolder vh = (ViewHolder) convertView.getTag();
 		VacancyItemModel item = data.get(position);
 		StringBuilder sb = new StringBuilder();
-		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, context.getResources().getConfiguration().locale);
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, context
+				.getResources().getConfiguration().locale);
+		PublisherItemModel publisher = item.getPublisher();
 		sb.append(sdf.format(item.getDate()));
 		sb.append(":\n");
-		sb.append(item.getPublisher().getName());
+		sb.append(publisher.getName());
 		sb.append(":\n");
 		sb.append(item.getName());
 		vh.text.setText(sb.toString());
-		vh.image.setImageDrawable(item.getPublisherIcon());
-		
+		vh.image.setImageDrawable(context.getResources().getDrawable(
+				R.drawable.ic_no_image_unselected));
+		ImageAsync loader = new ImageAsync(vh.image);
+		loader.execute(publisher.getIconUrl());
+
 		return convertView;
 	}
 

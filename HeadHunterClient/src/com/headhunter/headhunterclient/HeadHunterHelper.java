@@ -1,7 +1,5 @@
 package com.headhunter.headhunterclient;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -15,7 +13,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Debug;
 
@@ -62,8 +59,8 @@ public class HeadHunterHelper extends
 			Locale currentLocale = activity.getResources().getConfiguration().locale;
 			parameters
 					.add(new BasicNameValuePair(SERVICE_PARAMETER_PAGE, page));
-			parameters
-					.add(new BasicNameValuePair(SERVICE_PARAMETER_LOCALE, currentLocale.getLanguage().toUpperCase(currentLocale)));
+			parameters.add(new BasicNameValuePair(SERVICE_PARAMETER_LOCALE,
+					currentLocale.getLanguage().toUpperCase(currentLocale)));
 			String requestUrl = createRequestString(SERVICE_VACANCIES,
 					parameters);
 			HttpGet httpget = new HttpGet(requestUrl);
@@ -104,8 +101,6 @@ public class HeadHunterHelper extends
 				if (jIcons != null) {
 					String iconUrl = jIcons.getString(JSON_PARAMETER_90);
 					publisher.setIconUrl(iconUrl);
-					Drawable icon = LoadImageFromWebOperations(new URL(iconUrl));
-					modelItem.setPublisherIcon(icon);
 				}
 				modelItem.setPublisher(publisher);
 				data.add(modelItem);
@@ -135,15 +130,5 @@ public class HeadHunterHelper extends
 			sb.append("&");
 		}
 		return sb.toString();
-	}
-
-	private Drawable LoadImageFromWebOperations(URL url) {
-		try {
-			InputStream is = (InputStream) url.getContent();
-			Drawable d = Drawable.createFromStream(is, "src name");
-			return d;
-		} catch (Exception e) {
-			return null;
-		}
 	}
 }
